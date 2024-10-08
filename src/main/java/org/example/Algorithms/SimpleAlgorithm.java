@@ -24,11 +24,11 @@ public class SimpleAlgorithm implements PrimeAlgorithms {
 
     @Override
     public void run(Range range) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         List<Integer> primes = findPrimes(range);
         for (int prime : primes) {
             System.out.print(prime + " ");
