@@ -1,4 +1,5 @@
 package org.example;
+import org.example.Algorithms.EratosthenesAlgorithm;
 import org.example.Algorithms.SimpleAlgorithm;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,24 @@ public class Main {
             System.out.print("Enter the number of threads you want: ");
             int threadNumber = scanner.nextInt();
 
+            //Choosing the Algorithms:
+            System.out.print("""
+                
+                You have this algorithms:
+                To choose a "SimpleAlgorithm" press 1.
+                To choose a "EratosthenesAlgorithm" press 2.
+                To Exit the program press 3.
+                
+                """);
+            int algorithmNumber = scanner.nextInt();
+            PrimeAlgorithms algorithm = null;
+            if(algorithmNumber == 1){
+                algorithm = new SimpleAlgorithm();
+            }
+            if(algorithmNumber == 2){
+                algorithm = new EratosthenesAlgorithm();
+            }
+
             // How to split the range
             System.out.print("""
                 
@@ -38,17 +57,15 @@ public class Main {
                 
                 """);
             int choice = scanner.nextInt();
-
             List<AlgorithmsCalculater> threads = new ArrayList<>();
-            PrimeAlgorithms algorithm = new SimpleAlgorithm();
 
             if (choice == 1){
-                int length = range.getHigh() - range.getLow();
+                int length = 1+ range.getHigh() - range.getLow();
                 int partSize= length / threadNumber;
 
                 for ( int i=0 ; i<threadNumber ; i++){
                     int start = range.getLow() + i * partSize;
-                    int end = (i == threadNumber-1 ) ? range.getHigh() : start+partSize;
+                    int end = (i == threadNumber-1 ) ? range.getHigh() : start+partSize-1;
                     Range subRange = new Range(start, end);
                     threads.add(new AlgorithmsCalculater(subRange, algorithm));
                     threads.getLast().start();
